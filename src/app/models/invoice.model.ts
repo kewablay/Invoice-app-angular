@@ -1,8 +1,8 @@
 export interface Address {
-  street: string;
-  city: string;
-  postCode: string;
-  country: string;
+  street?: string;
+  city?: string;
+  postCode?: string;
+  country?: string;
 }
 
 export interface Item {
@@ -20,7 +20,7 @@ export interface Invoice {
     description: string;
     paymentTerms: number;
     clientName: string;
-    clientEmail: string;
+    clientEmail?: string;
     status: 'paid' | 'pending' | 'draft'; // Consider using a union type for status
     senderAddress: Address;
     clientAddress: Address;
