@@ -1,0 +1,11 @@
+<section>
+  <p>invoice-list works!</p>
+  <h3>Invoice Lists</h3>
+
+  @for(invoice of invoices$ | async; track invoice){
+  <p>
+    {{ invoice.id }} ||  {{ invoice.clientName }} ||  {{ invoice.paymentDue }} || 
+    {{ invoice.status }}
+  </p>
+  }
+</section>
