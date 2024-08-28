@@ -3,9 +3,12 @@
   <h3>Invoice Lists</h3>
 
   @for(invoice of invoices$ | async; track invoice){
-  <p>
-    {{ invoice.id }} ||  {{ invoice.clientName }} ||  {{ invoice.paymentDue }} || 
-    {{ invoice.status }}
-  </p>
+  <div>
+    <a routerLink="/invoice-detail/{{ invoice.id }}">
+      {{ invoice.id }} || {{ invoice.clientName }} ||
+      {{ invoice.paymentDue }} ||
+      {{ invoice.status }}
+    </a>
+  </div>
   }
 </section>
