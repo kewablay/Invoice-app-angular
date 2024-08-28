@@ -11,7 +11,6 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getInvoice(): Observable<any[]> {
-    console.log("About to get invoice from server")
     return this.http.get<Invoice[]>(environment.apiUrl);
   }
 }
