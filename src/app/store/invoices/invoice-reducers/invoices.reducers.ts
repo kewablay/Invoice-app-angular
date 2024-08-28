@@ -1,8 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  addInvoice,
+  deleteInvoice,
   loadInvoices,
   loadInVoicesError,
   loadInvoicesSuccess,
+  updateFilters,
+  updateInvoice,
 } from '../invoices-actions/invoices.actions';
 import {
   initialInvoiceState,
@@ -15,5 +19,11 @@ export const invoiceReducer = createReducer(
   on(loadInvoicesSuccess, (state, { invoices }) =>
     invoiceAdapter.setAll(invoices, { ...state, loading: false })
   ),
-  on(loadInVoicesError, (state, { error }) => ({ ...state, error }))
+  on(loadInVoicesError, (state, { error }) => ({ ...state, error })),
+  on(addInvoice, (state, { invoice }) => invoiceAdapter.addOne(invoice, state)),
+  on(updateInvoice, (state, { invoice }) =>
+    invoiceAdapter.updateOne({ id: invoice.id, changes: invoice }, state)
+  ),
+  on(deleteInvoice, (state, { id }) => invoiceAdapter.removeOne(id, state)),
+  on(updateFilters, (state, { filters }) => ({ ...state, filters }))
 );
