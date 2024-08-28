@@ -24,10 +24,4 @@ export class InvoiceDetailComponent {
       })
     );
   }
-
-  ngOnInit() {
-    this.invoice$.subscribe((invoice) =>
-      console.log('invoice from detail', invoice)
-    );
-  }
 }
