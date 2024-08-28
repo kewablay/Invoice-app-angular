@@ -1,1 +1,8 @@
 <p>invoice-detail works!</p>
+<!-- <p>{{ invoice.id }} || {{ invoice.clientName }} ||
+    {{ invoice.paymentDue }} ||
+    {{ invoice.status }}</p> -->
+<p>
+  {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
+  {{ (invoice$ | async)?.paymentDue }} || {{ (invoice$ | async)?.status }}
+</p>
