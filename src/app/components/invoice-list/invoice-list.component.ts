@@ -16,7 +16,6 @@ import { RouterLink } from '@angular/router';
 })
 export class InvoiceListComponent {
   invoices$!: Observable<Invoice[]>;
-  singleInvoice$!: Observable<Invoice | undefined>;
 
   constructor(private store: Store<AppState>) {
     this.invoices$ = this.store.select(selectFilteredInvoices);
