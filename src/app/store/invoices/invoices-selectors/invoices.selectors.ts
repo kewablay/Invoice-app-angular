@@ -42,3 +42,7 @@ export const selectFilteredInvoices = createSelector(
     );
   }
 );
+
+
+export const selectInvoiceById = (id: string) =>
+  createSelector(selectInvoiceEntities, (entities) => entities[id]);
