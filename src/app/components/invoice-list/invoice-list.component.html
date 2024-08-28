@@ -2,6 +2,21 @@
   <p>invoice-list works!</p>
   <h3>Invoice Lists</h3>
 
+  <div>
+    <label
+      ><input type="checkbox" (change)="updateFilter('paid', $event)" />
+      Paid</label
+    >
+    <label
+      ><input type="checkbox" (change)="updateFilter('pending', $event)" />
+      Pending</label
+    >
+    <label
+      ><input type="checkbox" (change)="updateFilter('draft', $event)" />
+      Draft</label
+    >
+  </div>
+
   @for(invoice of invoices$ | async; track invoice){
   <div>
     <a routerLink="/invoice-detail/{{ invoice.id }}">
@@ -10,5 +25,11 @@
       {{ invoice.status }}
     </a>
   </div>
+
   }
+</section>
+<button (click)="createNewInvoice()">Create invoice</button>
+
+<section>
+  <app-invoice-form />
 </section>
