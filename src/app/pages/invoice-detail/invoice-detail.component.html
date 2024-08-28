@@ -2,7 +2,18 @@
 <!-- <p>{{ invoice.id }} || {{ invoice.clientName }} ||
     {{ invoice.paymentDue }} ||
     {{ invoice.status }}</p> -->
+<!-- <p>
+  {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
+  {{ (invoice$ | async)?.paymentDue }} || {{ (invoice$ | async)?.status }}
+</p> -->
 <p>
   {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
   {{ (invoice$ | async)?.paymentDue }} || {{ (invoice$ | async)?.status }}
 </p>
+
+@if(invoice$ | async; as invoice){
+<button (click)="deleteInvoice(invoice.id)">delete</button>
+<button (click)="markAsPaid(invoice.id)">Mark as paid</button>
+<button (click)="markAsPending(invoice.id)">Mark as paid</button>
+
+}
