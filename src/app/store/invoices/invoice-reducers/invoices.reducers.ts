@@ -12,6 +12,7 @@ import {
   initialInvoiceState,
   invoiceAdapter,
 } from '../invoice-state/invoice.state';
+import { filter } from 'rxjs';
 
 export const invoiceReducer = createReducer(
   initialInvoiceState,
@@ -25,5 +26,8 @@ export const invoiceReducer = createReducer(
     invoiceAdapter.updateOne({ id: invoice.id, changes: invoice }, state)
   ),
   on(deleteInvoice, (state, { id }) => invoiceAdapter.removeOne(id, state)),
-  on(updateFilters, (state, { filters }) => ({ ...state, filters }))
+  on(updateFilters, (state, { filterType, filterValue }) => ({
+    ...state,
+    filters: { ...state.filters, [filterType]: filterValue },
+  }))
 );
