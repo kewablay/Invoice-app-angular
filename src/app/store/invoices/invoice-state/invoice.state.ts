@@ -1,13 +1,15 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Invoice } from '../../../models/invoice.model';
 
+
+export interface Filters {
+  paid: boolean;
+  pending: boolean;
+  draft: boolean;
+};
 export interface InvoiceState extends EntityState<Invoice> {
   invoices: Invoice[];
-  filters: {
-    paid: boolean;
-    pending: boolean;
-    draft: boolean;
-  };
+  filters: Filters
   loading: boolean;
   error: string | null;
 }
