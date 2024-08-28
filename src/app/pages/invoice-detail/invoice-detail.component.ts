@@ -10,11 +10,12 @@ import {
   deleteInvoice,
   updateInvoice,
 } from '../../store/invoices/invoices-actions/invoices.actions';
+import { InvoiceFormComponent } from "../../components/invoice-form/invoice-form.component";
 
 @Component({
   selector: 'app-invoice-detail',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, InvoiceFormComponent],
   templateUrl: './invoice-detail.component.html',
   styleUrl: './invoice-detail.component.sass',
 })
@@ -33,7 +34,14 @@ export class InvoiceDetailComponent {
     );
   }
 
-  
+  testInvoice = (id: string) => {
+    const data = {
+      clientName: 'Kewa Blay',
+      clientEmail: 'kojokewajunior123@gmail.com',
+    };
+
+    this.updateInvoice(id, data);
+  };
 
   deleteInvoice = (id: string) => {
     this.store.dispatch(deleteInvoice({ id }));
@@ -45,5 +53,8 @@ export class InvoiceDetailComponent {
   };
   markAsPending = (id: string) => {
     this.store.dispatch(updateInvoice({ invoice: { id, status: 'pending' } }));
+  };
+  updateInvoice = (id: string, invoice: Partial<Invoice>) => {
+    this.store.dispatch(updateInvoice({ invoice: { id, ...invoice } }));
   };
 }
