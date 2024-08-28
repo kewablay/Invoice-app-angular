@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Invoice } from '../../../models/invoice.model';
+import { Filters } from '../invoice-state/invoice.state';
 
 export const loadInvoices = createAction('[Invoices] Load Invoices');
 export const loadInvoicesSuccess = createAction(
@@ -24,7 +25,12 @@ export const deleteInvoice = createAction(
   props<{ id: string }>()
 );
 
+// export const updateFilters = createAction(
+//   '[Invoices] Update Filters',
+//   props<{ filters: { paid: boolean; pending: boolean; draft: boolean } }>()
+// );
+
 export const updateFilters = createAction(
   '[Invoices] Update Filters',
-  props<{ filters: { paid: boolean; pending: boolean; draft: boolean } }>()
+  props<{ filterType: string; filterValue: boolean }>()
 );
