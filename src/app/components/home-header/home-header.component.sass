@@ -1,0 +1,65 @@
+@import '../../../styles.sass'
+    
+header 
+    .title-container
+        h1 
+            margin-bottom: .2rem
+
+        .total-invoices
+            color: $text-secondary
+
+    .filter-and-newInvoice
+        gap: .2rem
+
+        &.filter-and-newInvoice:hover .filter-button:hover .filter-dropdown
+            transform: scale(1, 1)
+            transform-origin: top
+            transition: all 0.2s ease-in-out
+    
+        .filter-button
+            position: relative
+            color: $text-secondary
+            gap: .3rem 
+            padding: 1rem
+
+
+            .label
+                font-weight: bold
+
+            
+
+        .filter-dropdown
+            position: absolute
+            top: 2.5rem
+            display: flex
+            transform: scale(0, 0)
+            transform-origin: top center
+            flex-direction: column
+            // justify-content: center
+            gap: .5rem
+            border-radius: 10px
+            background-color: $bg-white !important
+            padding: .6rem
+            padding-right: 1.5rem
+            box-shadow: $shadow-primary
+
+            label 
+                display: flex
+                align-items: center
+                gap: .5rem
+    
+        .invoice-btn
+            display: flex
+            align-items: center
+            gap: 0.5rem
+            border-radius: 20rem
+            padding: 0
+            padding: .3rem
+            padding-right: 1rem
+            border: none
+
+            .icon   
+                width: 30px
+                height: 30px
+                border-radius: 50%
+                background: $bg-accent
