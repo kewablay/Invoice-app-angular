@@ -112,4 +112,9 @@
   <button type="submit" [disabled]="!invoiceForm.valid">
     {{ invoice ? "Update Invoice" : "Create Invoice" }}
   </button>
+
+  <!-- save as draft -->
+   @if(!invoice) {
+     <button type="button" (click)="saveAsDraft()">Save as Draft</button>
+   }
 </form>

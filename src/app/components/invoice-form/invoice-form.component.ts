@@ -145,7 +145,7 @@ export class InvoiceFormComponent {
 
       const newInvoice = {
         ...formValue,
-        id: this.generateId.generateUniqueId(),
+        id: this.invoice ? this.invoice.id : this.generateId.generateUniqueId(),
         createdAt: createdAt.toISOString().split('T')[0],
         paymentDue: paymentDue.toISOString().split('T')[0],
         status: 'pending' as 'paid' | 'pending' | 'draft',
@@ -161,13 +161,36 @@ export class InvoiceFormComponent {
 
       // if invoice is editing then we dispatch updateInvoice else we createInvoice
       if (this.invoice) {
-        console.log("about to update invoice")
+        console.log('about to update invoice');
         const id = this.invoice.id;
-        console.log("new invoice, ", newInvoice, " id", id)
+        console.log('new invoice, ', newInvoice, ' id', id);
         this.store.dispatch(updateInvoice({ invoice: { id, ...newInvoice } }));
       } else {
         this.store.dispatch(addInvoice({ invoice: newInvoice }));
       }
     }
+  }
+
+  saveAsDraft() {
+    const formValue = this.invoiceForm.value;
+
+    const draftInvoice = {
+      ...formValue,
+      id: this.invoice ? this.invoice.id : this.generateId.generateUniqueId(),
+      createdAt: new Date().toISOString().split('T')[0],
+      paymentDue: '', // Can be left empty for drafts
+      status: 'draft' as 'paid' | 'pending' | 'draft',
+      items: formValue.items.map((item: any) => ({
+        ...item,
+        total: (item.quantity || 0) * (item.price || 0),
+      })),
+      total: formValue.items.reduce(
+        (sum: number, item: any) =>
+          sum + (item.quantity || 0) * (item.price || 0),
+        0
+      ),
+    };
+
+    this.store.dispatch(addInvoice({ invoice: draftInvoice }));
   }
 }
