@@ -8,11 +8,12 @@ import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { addInvoice, updateFilters } from '../../store/invoices/invoices-actions/invoices.actions';
 import { InvoiceFormComponent } from "../invoice-form/invoice-form.component";
+import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
 
 @Component({
   selector: 'app-invoice-list',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, InvoiceFormComponent],
+  imports: [AsyncPipe, RouterLink, InvoiceFormComponent, InvoiceCardComponent],
   templateUrl: './invoice-list.component.html',
   styleUrl: './invoice-list.component.sass',
 })
