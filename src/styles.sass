@@ -1,1 +1,174 @@
 /* You can add global styles to this file, and also import other style files */
+
+$ff-spartan: "League Spartan", sans-serif
+
+
+// Primary colors 
+$primary-purple: #7C5DFA
+$primary-light-purple: #9277FF
+$clr-green: #33D69F
+$clr-orange: #FF8F00
+$clr-red: #EC5757
+$clr-black: #0C0E16
+
+// Background colors
+$clr-dark:  #141625
+$clr-dark-acent-900: #1E2139 
+$clr-dark-acent-100: #373B53 
+$clr-light-green: #eafbf5
+$clr-light-orange: #fff4e5
+
+$clr-white: white
+
+// background grays
+$clr-gray-900: #F8F8FB
+$clr-gray-800: #F9FAFE
+$clr-gray-100: #373B53 //status draft bg color
+
+
+// text grays 
+$clr-gray-500: #7E88C3  // light but darker purple
+$clr-gray-400: #888EB0  // light but a little more purplish
+$clr-gray-300: #DFE3FA // lightest gray
+
+
+// FONT SIZES
+$fs-xl: 32px
+$fs-lg: 24px
+$fs-md: 18px
+$fs-base: 16px
+$fs-sm: 14px
+$fs-xs: 12px
+
+
+// COLORS FOR LIGHT THEME
+// background colors
+$bg-clr: $clr-gray-900 // main background color
+$bg-accent: $clr-white  // main background accent
+$bg-red: $clr-red
+$bg-purple: $primary-purple
+$panel-bg: $clr-dark-acent-100
+$shadow-primary: 0px 10px 20px 0px rgba(72, 84, 159, 0.25)
+$shadow-secondary: 0px 10px 10px -10px rgba(72, 84, 159, 0.10)
+
+$bg-accent-green: $clr-light-green
+$bg-accent-orange: $clr-light-orange
+$bg-accent-gray: $clr-gray-300
+$bg-white: $clr-white
+
+
+
+
+// text-colors
+$text-primary: $clr-dark
+$text-secondary: $clr-gray-400
+$text-secondary-200: $clr-gray-500
+
+
+
+body 
+    font-family: $ff-spartan
+    background-color: $bg-clr
+    color: $text-primary
+    transition: all 0.2s ease-in-out
+    padding: 0
+    margin: 0
+
+button
+    cursor: pointer
+button, input
+  font-family: $ff-spartan
+
+// UTILITY CLASSES
+.custom-button
+  background: none
+  border: none
+  cursor: pointer
+
+.img-fluid
+  max-width: 100%
+  height: auto
+  oject-fit: cover
+
+.btn 
+  padding: 0.5rem 1rem
+  border: none
+  border-radius: 0.25rem
+  cursor: pointer
+  transition: background-color 0.3s ease
+  
+  &-primary 
+    background-color: $primary-purple
+    color: white
+    &:hover 
+      background-color: $primary-light-purple
+    
+  
+  
+  &-secondary 
+    background-color: $clr-gray-800
+    color: white
+    &:hover 
+      background-color: $clr-gray-300
+
+  &-warning
+    background-color: $bg-red
+    color: white
+    &:hover 
+      background-color: #FF9797
+
+.title
+  font-size: $fs-xl
+  font-weight: bold
+
+.subTitle 
+  font-size: $fs-lg 
+  font-weight: bold
+
+.text-lg
+  font-size: $fs-lg
+
+.text-md
+  font-size: $fs-md
+
+.text-base
+  font-size: $fs-base
+
+.text-sm
+  font-size: $fs-sm
+
+.flex
+  display: flex
+  align-items: center
+
+.flex-between
+  display: flex 
+  justify-content: space-between
+  align-items: center
+
+.flex-center
+  display: flex 
+  justify-content: center
+  align-items: center
+
+.flex-col
+  display: flex 
+  flex-direction: cloumn
+  justify-content: center
+    
+
+[data-theme="dark"]
+    $bg-clr: $clr-dark // main background color
+    $bg-accent: $clr-dark-acent-100  // main background accent
+    $panel-bg: $clr-dark-acent-900
+    $bg-white: $clr-dark
+
+    // text-colors
+    $text-primary: $clr-white
+    $text-secondary: $clr-white
+    $text-secondary-200: $clr-gray-300
+
+    body 
+        font-family: $ff-spartan
+        background-color: $bg-clr
+        color: $text-primary
