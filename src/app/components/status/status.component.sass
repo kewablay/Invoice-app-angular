@@ -1,0 +1,37 @@
+@import "../../../styles.sass"
+    
+.status
+    color: $text-primary
+    // background: $bg-accent-gray
+    display: flex
+    gap: .5rem
+    max-width: fit-content
+    .circle
+        display: inline-block
+        width: 6px
+        height: 6px
+        background: $clr-light-green
+        border-radius: 50%
+    
+.status.pending 
+    background-color: rgba(255, 143, 0, 0.1)
+    color: #FF8F00
+    .circle 
+        background-color: #FF8F00
+    
+
+
+.status.paid 
+    background-color: rgba(51, 214, 159, 0.1)
+    color: #33D69F
+    .circle 
+        background-color: #33D69F
+    
+
+
+.status.draft 
+    background-color: rgba(223, 227, 250, 0.1)
+    color: #373B53
+    .circle 
+        background-color: #373B53
+    
