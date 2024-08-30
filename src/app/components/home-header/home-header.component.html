@@ -24,15 +24,15 @@
       <!-- filter dropdown -->
       <div class="filter-dropdown">
         <label
-          ><input type="checkbox" (change)="updateFilter('paid', $event)" />
+          ><input type="checkbox" [checked]="(filters$ | async)?.paid" (change)="updateFilter('paid', $event)" />
           Paid</label
         >
         <label
-          ><input type="checkbox" (change)="updateFilter('pending', $event)" />
+          ><input type="checkbox" [checked]="(filters$ | async)?.pending" (change)="updateFilter('pending', $event)" />
           Pending</label
         >
         <label
-          ><input type="checkbox" (change)="updateFilter('draft', $event)" />
+          ><input type="checkbox" [checked]="(filters$ | async)?.draft" (change)="updateFilter('draft', $event)" />
           Draft</label
         >
       </div>
