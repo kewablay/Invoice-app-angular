@@ -11,11 +11,13 @@ import {
   updateInvoice,
 } from '../../store/invoices/invoices-actions/invoices.actions';
 import { InvoiceFormComponent } from "../../components/invoice-form/invoice-form.component";
+import { InvoiceDetailHeaderComponent } from "../../components/invoice-detail-header/invoice-detail-header.component";
+import { InvoiceDetailContentComponent } from "../../components/invoice-detail-content/invoice-detail-content.component";
 
 @Component({
   selector: 'app-invoice-detail',
   standalone: true,
-  imports: [AsyncPipe, InvoiceFormComponent],
+  imports: [AsyncPipe, InvoiceFormComponent, InvoiceDetailHeaderComponent, InvoiceDetailContentComponent],
   templateUrl: './invoice-detail.component.html',
   styleUrl: './invoice-detail.component.sass',
 })
