@@ -1,28 +1,30 @@
-<p>invoice-detail works!</p>
-<!-- <p>{{ invoice.id }} || {{ invoice.clientName }} ||
-    {{ invoice.paymentDue }} ||
-    {{ invoice.status }}</p> -->
-<!-- <p>
-  {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
-  {{ (invoice$ | async)?.paymentDue }} || {{ (invoice$ | async)?.status }}
-</p> -->
-<p>
-  {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
-  {{ (invoice$ | async)?.clientEmail }} {{ (invoice$ | async)?.paymentDue }} ||
-  {{ (invoice$ | async)?.status }}
-</p>
+<main class="invocie-detail">
+  <div class="content-wrapper">
+    @if(invoice$ | async; as invoice) {
+    <app-invoice-detail-header [invoice]="invoice" />
+    <app-invoice-detail-content />
 
-@if(invoice$ | async; as invoice){
-<button (click)="deleteInvoice(invoice.id)">delete</button>
-<button (click)="markAsPaid(invoice.id)">Mark as paid</button>
-<button (click)="markAsPending(invoice.id)">Mark as pending</button>
-<button (click)="testInvoice(invoice.id)">Edit data</button>
+    }
+    <!-- <p>
+      {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
+      {{ (invoice$ | async)?.clientEmail }}
+      {{ (invoice$ | async)?.paymentDue }} ||
+      {{ (invoice$ | async)?.status }}
+    </p>
 
-}
+    @if(invoice$ | async; as invoice){
+    <button (click)="deleteInvoice(invoice.id)">delete</button>
+    <button (click)="markAsPaid(invoice.id)">Mark as paid</button>
+    <button (click)="markAsPending(invoice.id)">Mark as pending</button>
+    <button (click)="testInvoice(invoice.id)">Edit data</button>
 
-<h1>Edit Invoice</h1>
+    }
 
-@if(invoice$ | async; as invoice){
-  <app-invoice-form [invoice]="invoice"/>
-  
-}
+    <h1>Edit Invoice</h1>
+
+    @if(invoice$ | async; as invoice){
+    <app-invoice-form [invoice]="invoice" />
+
+    } -->
+  </div>
+</main>
