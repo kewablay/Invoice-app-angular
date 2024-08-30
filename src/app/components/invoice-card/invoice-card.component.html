@@ -1,4 +1,4 @@
-<div class="invoice-card">
+<div class="invoice-card card">
   <div class="invoice__id">
     <p>
       #<span class="id">{{ invoice.id }}</span>
@@ -16,10 +16,7 @@
     </p>
   </div>
   <div class="invoice__status">
-    <div class="tag status flex-center" [class]="invoice.status.toLowerCase()">
-      <span class="circle"></span>
-      <span class="status">{{ invoice.status }}</span>
-    </div>
+    <app-status [invoice]="invoice" />
   </div>
   <div class="invoice__right-arrow">
     <span class="icon flex-center">
