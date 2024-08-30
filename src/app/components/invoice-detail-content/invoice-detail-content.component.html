@@ -1,1 +1,79 @@
-<p>invoice-detail-content works!</p>
+<div class="detail-content-wrapper card">
+  <div class="detail-content">
+    <div class="div1">
+      <h4><span class="hash">#</span>{{ invoice.id }}</h4>
+      <p class="text-secondary-200">{{ invoice.description }}</p>
+    </div>
+    <div class="div2">
+      <p class="text-secondary-200">{{ invoice.senderAddress.city }}</p>
+      <p class="text-secondary-200">{{ invoice.senderAddress.country }}</p>
+      <p class="text-secondary-200">{{ invoice.senderAddress.postCode }}</p>
+      <p class="text-secondary-200">{{ invoice.senderAddress.street }}</p>
+    </div>
+    <div class="div3">
+      <p class="label text-secondary-200">Ivoice Date</p>
+      <h4 class="text-md">{{ invoice.createdAt | date : "mediumDate" }}</h4>
+    </div>
+    <div class="div4">
+      <p class="label text-secondary-200">Payment Due</p>
+      <h4 class="text-md">{{ invoice.paymentDue | date : "mediumDate" }}</h4>
+    </div>
+    <div class="div5">
+      <p class="reciepient-address text-secondary-200">Bill To</p>
+      <h4 class="text-md">{{ invoice.clientName }}</h4>
+      <p class="text-secondary-200">{{ invoice.clientAddress.city }}</p>
+      <p class="text-secondary-200">{{ invoice.clientAddress.country }}</p>
+      <p class="text-secondary-200">{{ invoice.clientAddress.postCode }}</p>
+      <p class="text-secondary-200">{{ invoice.clientAddress.street }}</p>
+    </div>
+    <div class="div6">
+      <p class="text-secondary-200">Send to</p>
+      <h4 class="text-md">{{ invoice.clientEmail }}</h4>
+    </div>
+  </div>
+
+  <!-- items list  -->
+  <div class="items-list-container ">
+    <!-- items header for large screen  -->
+    <div class="item-header item">
+      <div class="div1">
+        <p class="text-secondary-200">Item Name</p>
+      </div>
+      <div class="div2">
+        <p class="text-secondary-200">QTY</p>
+      </div>
+      <div class="div3">
+        <p class="text-secondary-200">Price</p>
+      </div>
+      <div class="div4">
+        <p class="text-secondary-200">Total</p>
+      </div>
+    </div>
+    <!-- items header for large screen  -->
+    @for(item of invoice.items; track item) {
+    <div class="item">
+      <div class="div1">
+        <h5 class="text-md">{{ item.name }}</h5>
+      </div>
+      <div class="div2">
+        <p class="text-secondary-200">{{ item.quantity }}</p>
+      </div>
+      <div class="div3">
+        <p class="text-secondary-200">
+          <span>{{ item.quantity }} x </span> <span>{{ item.price }}</span>
+        </p>
+      </div>
+      <div class="div4">
+        <h3>{{ item.total | currency : "GBP" : "symbol" : "1.2-2" }}</h3>
+      </div>
+    </div>
+
+    }
+  </div>
+  <!-- item lists ends -->
+
+  <div class="total flex-between">
+    <p>Grand Total</p>
+    <h1 class="title">{{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}</h1>
+  </div>
+</div>
