@@ -73,6 +73,11 @@ body
     transition: all 0.2s ease-in-out
     padding: 0
     margin: 0
+    font-size: $fs-base
+
+p, h1, h2, h3, h4, h5, h6
+    margin: 0
+    margin-bottom: .5rem
 
 button
     cursor: pointer
@@ -80,6 +85,19 @@ button, input
   font-family: $ff-spartan
 
 // UTILITY CLASSES
+.content-wrapper 
+  max-width: 1024px
+  margin-inline: auto
+  @media screen and (min-width: 1024px)
+    padding-inline: 3rem
+.tag
+  padding: 1rem 1.5rem
+  border-radius: 0.25rem
+  font-size: $fs-sm
+  font-weight: bold
+  border-radius: 8px
+
+
 .custom-button
   background: none
   border: none
@@ -88,7 +106,7 @@ button, input
 .img-fluid
   max-width: 100%
   height: auto
-  oject-fit: cover
+  object-fit: cover
 
 .btn 
   padding: 0.5rem 1rem
