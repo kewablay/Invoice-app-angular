@@ -8,8 +8,12 @@
   <div class="actions ">
     <button class="btn btn-secondary">Edit</button>
     <div class="flex">
-      <button class="btn btn-warning">Delete</button>
-      <button class="btn btn-primary">Mark as Paid</button>
+      <button (click)="deleteInvoice(invoice.id)" class="btn btn-warning">Delete</button>
+      @if(invoice.status === 'paid'){
+        <button (click)="markAsPending(invoice.id)" class="btn btn-primary">Mark as Pending</button>
+      } @else {
+        <button (click)="markAsPaid(invoice.id)" class="btn btn-primary">Mark as Paid</button>
+      }
     </div>
   </div>
 </div>
