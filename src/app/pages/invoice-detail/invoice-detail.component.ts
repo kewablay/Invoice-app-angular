@@ -26,7 +26,6 @@ export class InvoiceDetailComponent {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router
   ) {
     this.invoice$ = this.route.paramMap.pipe(
       switchMap((params) => {
@@ -45,17 +44,6 @@ export class InvoiceDetailComponent {
     this.updateInvoice(id, data);
   };
 
-  deleteInvoice = (id: string) => {
-    this.store.dispatch(deleteInvoice({ id }));
-    this.router.navigate(['']);
-  };
-
-  markAsPaid = (id: string) => {
-    this.store.dispatch(updateInvoice({ invoice: { id, status: 'paid' } }));
-  };
-  markAsPending = (id: string) => {
-    this.store.dispatch(updateInvoice({ invoice: { id, status: 'pending' } }));
-  };
   updateInvoice = (id: string, invoice: Partial<Invoice>) => {
     this.store.dispatch(updateInvoice({ invoice: { id, ...invoice } }));
   };
