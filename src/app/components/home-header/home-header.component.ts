@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { Observable } from 'rxjs';
-import { updateFilters } from '../../store/invoices/invoices-actions/invoices.actions';
+import { deleteInvoice, updateFilters, updateInvoice } from '../../store/invoices/invoices-actions/invoices.actions';
 import { selectFilters } from '../../store/invoices/invoices-selectors/invoices.selectors';
 import { Filters } from '../../store/invoices/invoice-state/invoice.state';
 import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-header',
