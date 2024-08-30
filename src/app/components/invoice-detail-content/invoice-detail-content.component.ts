@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Invoice } from '../../models/invoice.model';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-detail-content',
   standalone: true,
-  imports: [],
+  imports: [DatePipe, CurrencyPipe],
   templateUrl: './invoice-detail-content.component.html',
-  styleUrl: './invoice-detail-content.component.sass'
+  styleUrl: './invoice-detail-content.component.sass',
 })
 export class InvoiceDetailContentComponent {
-
+  @Input() invoice!: Invoice;
 }
