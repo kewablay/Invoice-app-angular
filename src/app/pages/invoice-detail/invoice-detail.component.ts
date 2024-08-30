@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { selectInvoiceById } from '../../store/invoices/invoices-selectors/invoices.selectors';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Invoice } from '../../models/invoice.model';
 import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -17,7 +17,7 @@ import { InvoiceDetailContentComponent } from "../../components/invoice-detail-c
 @Component({
   selector: 'app-invoice-detail',
   standalone: true,
-  imports: [AsyncPipe, InvoiceFormComponent, InvoiceDetailHeaderComponent, InvoiceDetailContentComponent],
+  imports: [AsyncPipe, InvoiceFormComponent, InvoiceDetailHeaderComponent, InvoiceDetailContentComponent, RouterLink],
   templateUrl: './invoice-detail.component.html',
   styleUrl: './invoice-detail.component.sass',
 })
