@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     @if(invoice$ | async; as invoice) {
     <app-invoice-detail-header [invoice]="invoice" />
-    <app-invoice-detail-content />
+    <app-invoice-detail-content [invoice]="invoice" />
 
     }
     <!-- <p>
