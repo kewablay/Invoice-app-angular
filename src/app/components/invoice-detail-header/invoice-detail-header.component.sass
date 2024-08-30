@@ -1,0 +1,45 @@
+@import '../../../styles.sass'
+    
+.card
+    .status
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 100%
+        gap: .8rem
+        
+        .status-label
+            color: $text-secondary
+
+    .actions
+        padding: 1.2rem
+        display: flex
+        justify-content: space-between
+        align-items: center
+        gap: .8rem
+        background: white
+        position: absolute
+        bottom: 0
+        left: 0
+        right: 0
+
+    div.flex 
+        gap: .8rem
+
+
+@media screen and (min-width: 1024px)
+    .card 
+        .status 
+            justify-content: initial
+            
+        .actions
+            position: static
+            flex-basis: 55%
+            justify-content: initial
+            padding: 0
+        div.flex 
+            flex-wrap: nowrap
+
+            button
+                flex-shrink: 0
+            
