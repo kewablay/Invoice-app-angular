@@ -1,18 +1,37 @@
-
 <div class="invoice-card">
-    <div class="id-and-name">
-        <p><span>#</span>{{ invoice.id }}</p>
-        <p>{{ invoice.clientName }}</p>
+  <div class="invoice__id">
+    <p>
+      #<span class="id">{{ invoice.id }}</span>
+    </p>
+  </div>
+  <div class="invoice__name">
+    <p class="name">{{ invoice.clientName }}</p>
+  </div>
+  <div class="invoice__date">
+    <p class="due-date">{{ invoice.paymentDue | date : "mediumDate" }}</p>
+  </div>
+  <div class="invoice__price">
+    <p class="price">
+      {{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}
+    </p>
+  </div>
+  <div class="invoice__status">
+    <div class="tag status flex-center" [class]="invoice.status.toLowerCase()">
+      <span class="circle"></span>
+      <span class="status">{{ invoice.status }}</span>
     </div>
-    <div class="date-price-and-status">
-        <div class="date-and-price">
-            <p>{{ invoice.paymentDue }}</p>
-            <p>${{ invoice.total }}</p>
-        </div>
-
-        <div class="status">
-            <span class="circle"></span>
-            <span>{{ invoice.status }}</span>
-        </div>
-    </div>
+  </div>
+  <div class="invoice__right-arrow">
+    <span class="icon flex-center">
+      <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1 1l4 4-4 4"
+          stroke="#7C5DFA"
+          stroke-width="2"
+          fill="none"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+  </div>
 </div>
