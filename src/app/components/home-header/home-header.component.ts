@@ -7,11 +7,14 @@ import { selectFilters } from '../../store/invoices/invoices-selectors/invoices.
 import { Filters } from '../../store/invoices/invoice-state/invoice.state';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { SidebarModule } from 'primeng/sidebar';
+import { InvoiceFormComponent } from "../invoice-form/invoice-form.component";
+import { ModalService } from '../../services/modalService/modal.service';
 
 @Component({
   selector: 'app-home-header',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, SidebarModule, InvoiceFormComponent],
   templateUrl: './home-header.component.html',
   styleUrl: './home-header.component.sass',
 })
@@ -19,13 +22,34 @@ export class HomeHeaderComponent {
   // invoice$: Observable
   total: number = 7
   filters$: Observable<Filters>
-  constructor(private store: Store<AppState>) {
+
+  isNewInvoiceModalOpen!: boolean;
+
+  constructor(private store: Store<AppState>, private modalService: ModalService) {
     this.filters$ = this.store.select(selectFilters)
+
+    this.modalService.isModalOpen('newInvoice')
+      .subscribe(isOpen => {
+        this.isNewInvoiceModalOpen = isOpen
+      })
   }
 
   updateFilter(filterType: string, event: Event) {
     const checked = (event.target as HTMLInputElement).checked;
     this.store.dispatch(updateFilters({ filterType, filterValue: checked }));
+  }
+
+  openNewInvoiceModal () {
+    this.modalService.openModal('newInvoice')
+  }
+
+
+  onSidebarVisibleChange(isVisible: boolean) {
+    if (isVisible) {
+      this.modalService.openModal('newInvoice');
+    } else {
+      this.modalService.closeModal('newInvoice');
+    }
   }
 
 }
