@@ -5,15 +5,26 @@
   </div>
 
   <!-- actions -->
-  <div class="actions ">
-    <button class="btn btn-secondary">Edit</button>
+  <div class="actions">
+    <button class="btn btn-secondary" (click)="openEditModal()">Edit</button>
     <div class="flex">
-      <button (click)="deleteInvoice(invoice.id)" class="btn btn-warning">Delete</button>
+      <button (click)="deleteInvoice(invoice.id)" class="btn btn-warning">
+        Delete
+      </button>
       @if(invoice.status === 'paid'){
-        <button (click)="markAsPending(invoice.id)" class="btn btn-primary">Mark as Pending</button>
+      <button (click)="markAsPending(invoice.id)" class="btn btn-primary">
+        Mark as Pending
+      </button>
       } @else {
-        <button (click)="markAsPaid(invoice.id)" class="btn btn-primary">Mark as Paid</button>
+      <button (click)="markAsPaid(invoice.id)" class="btn btn-primary">
+        Mark as Paid
+      </button>
       }
     </div>
   </div>
 </div>
+
+<!-- modal -->
+<p-sidebar [visible]="isEditModalOpen" (visibleChange)="onSidebarVisibleChange($event)"  styleClass="w-30rem">
+  <app-invoice-form [invoice]="invoice"></app-invoice-form>
+</p-sidebar>
