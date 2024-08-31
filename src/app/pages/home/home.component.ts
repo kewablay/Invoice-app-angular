@@ -10,5 +10,4 @@ import { HomeHeaderComponent } from "../../components/home-header/home-header.co
   styleUrl: './home.component.sass'
 })
 export class HomeComponent {
-
 }
