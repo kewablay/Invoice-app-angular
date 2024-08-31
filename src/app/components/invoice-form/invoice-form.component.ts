@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { Invoice } from '../../models/invoice.model';
 import { Observable } from 'rxjs';
 import { selectInvoiceById } from '../../store/invoices/invoices-selectors/invoices.selectors';
+import { ModalService } from '../../services/modalService/modal.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -45,7 +46,8 @@ export class InvoiceFormComponent {
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
-    private generateId: GenerateIdService
+    private generateId: GenerateIdService, 
+    private modalService: ModalService
   ) {
     this.invoiceForm = this.fb.group({});
 
@@ -148,7 +150,7 @@ export class InvoiceFormComponent {
         id: this.invoice ? this.invoice.id : this.generateId.generateUniqueId(),
         createdAt: createdAt.toISOString().split('T')[0],
         paymentDue: paymentDue.toISOString().split('T')[0],
-        status: 'pending' as 'paid' | 'pending' | 'draft',
+        status: !this.invoice ? 'pending' as 'paid' | 'pending' | 'draft' : this.invoice.status, // if its a new invoice set status to pending
         items: formValue.items.map((item: any) => ({
           ...item,
           total: item.quantity * item.price,
@@ -161,12 +163,12 @@ export class InvoiceFormComponent {
 
       // if invoice is editing then we dispatch updateInvoice else we createInvoice
       if (this.invoice) {
-        console.log('about to update invoice');
         const id = this.invoice.id;
-        console.log('new invoice, ', newInvoice, ' id', id);
         this.store.dispatch(updateInvoice({ invoice: { id, ...newInvoice } }));
+        this.modalService.closeModal('editInvoice');
       } else {
         this.store.dispatch(addInvoice({ invoice: newInvoice }));
+        this.modalService.closeModal('newInvoice');
       }
     }
   }
