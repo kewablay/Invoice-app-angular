@@ -1,9 +1,11 @@
 @import '../../../styles.sass'
     
 .main-pannel
+    position: fixed // just to make the z-index apply properly
     padding: 0
+    width: 100%
     background: $panel-bg
-    // z-index: 2000
+    z-index: 4000
 
     .logo
         img 
@@ -40,6 +42,7 @@
         flex-direction: column
         border-radius: 0px 20px 20px 0px
         height: 100vh
+        width: fit-content
         position: fixed
         left: 0
         top: 0
