@@ -14,11 +14,28 @@ export class ToastService {
 
   constructor(private messageService: MessageService) { }
 
-  showToast({type, title, message}:ToastType) {
+  showToast( severity: string, summary: string, detail: string, life: number = 3000) {
     this.messageService.add({
-      severity: type,
-      summary: title,
-      detail: message,
+      severity,
+      summary,
+      detail,
+      life
     });
+  }
+
+  showSuccess(summary: string, detail: string) {
+    this.showToast('success', summary, detail);
+  }
+
+  showInfo(summary: string, detail: string) {
+    this.showToast('info', summary, detail);
+  }
+
+  showWarn(summary: string, detail: string) {
+    this.showToast('warn', summary, detail);
+  }
+
+  showError(summary: string, detail: string) {
+    this.showToast('error', summary, detail);
   }
 }
