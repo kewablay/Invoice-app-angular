@@ -44,12 +44,9 @@
       <span>Back</span>
     </button>
   </ng-template>
-  <app-invoice-form (closeModal)="closeEditModal()" [invoice]="invoice" (showToast)="showToast($event)" />
+  <app-invoice-form (closeModal)="closeEditModal()" [invoice]="invoice"  />
 </p-sidebar>
 
-<p-toast
-  [breakpoints]="{ '480px': { width: '70%', right: '0', left: 'initial' },  }"
-/>
 
 <p-confirmDialog >
   <ng-template pTemplate="message" let-message>
