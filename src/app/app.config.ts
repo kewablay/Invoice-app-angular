@@ -10,6 +10,7 @@ import { invoiceReducer } from './store/invoices/invoice-reducers/invoices.reduc
 import { themeEffect } from './store/theme/theme.effects';
 import { themeReducer } from './store/theme/theme.reducers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideEffects(themeEffect),
     provideState({ name: 'invoices', reducer: invoiceReducer }),
     provideState({ name: 'theme', reducer: themeReducer }),
+    MessageService,
   ],
 };
