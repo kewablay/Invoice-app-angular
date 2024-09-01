@@ -26,5 +26,21 @@
 
 <!-- modal -->
 <p-sidebar [visible]="isEditModalOpen" (visibleChange)="onSidebarVisibleChange($event)"  styleClass="w-30rem">
-  <app-invoice-form [invoice]="invoice"></app-invoice-form>
+  <ng-template pTemplate="header">
+    <button (click)="closeEditModal()" class="back-btn custom-button">
+      <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.342.886L2.114 5.114l4.228 4.228"
+          stroke="#9277FF"
+          stroke-width="2"
+          fill="none"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>Back</span>
+    </button>
+  </ng-template>
+  <app-invoice-form [invoice]="invoice" (showToast)="showToast($event)" />
 </p-sidebar>
+
+<p-toast [breakpoints]="{ '480px': { width: '70%', right: '0', left: 'initial' },  }" />
