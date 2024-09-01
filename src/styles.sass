@@ -252,7 +252,7 @@ button, input
 
 [data-theme="dark"]
     $bg-clr: $clr-dark // main background color
-    $bg-accent: $clr-dark-acent-100  // main background accent
+    $bg-accent: $clr-dark-acent-900 // main background accent
     $panel-bg: $clr-dark-acent-900
     $bg-white: $clr-dark
 
@@ -261,11 +261,57 @@ button, input
     $text-secondary: $clr-white
     $text-secondary-200: $clr-gray-300
 
+    .filter-dropdown
+      background: $bg-accent !important
     body 
         font-family: $ff-spartan
         background-color: $bg-clr
         color: $text-primary
 
+    .invoice-card
+      background: $bg-accent !important
+      color: $text-primary !important
+      .invoice__id span, .invoice__name p
+        color: $text-primary !important
+      .invoice__date p
+        color: $text-secondary !important
+
+    .status.draft
+      color: $text-secondary-200 !important
+      .circle
+        background: $text-secondary-200 !important
+    .card
+      background: $bg-accent !important
+      .actions
+        background: $bg-accent !important
+
+    .items-list-container
+      background: #252945 !important
+    .total
+      background: $clr-black !important
+
+    .text-secondary-200, label
+      color: #DFE3FA !important
+
+    .back-btn
+      color: $text-primary !important
+
+    .p-sidebar-left , .form-actions
+      color: $text-primary !important
+      background: $clr-dark !important
+      border-color: #252945 !important
+    
+
+    input, .add-new-item button, .p-inputwrapper, .p-dropdown *
+      border-color: #252945 !important
+      background: $clr-dark-acent-900 !important
+      color: $text-primary !important
+
+    .p-dialog-footer,.p-dialog-content,.p-dialog-header 
+      background: $bg-accent !important
+      color: $text-primary !important
+    
+    
 
 @media screen and (min-width: 768px)
   // sidebar modal custom styles 
