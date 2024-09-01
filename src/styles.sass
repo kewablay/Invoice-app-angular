@@ -130,14 +130,20 @@ button, input
     color: white
     &:hover 
       background-color: $primary-light-purple
-    
-  
   
   &-secondary 
     background-color: $clr-gray-800
     color: $text-secondary-200
     &:hover 
       background-color: #DFE3FA
+
+  &-tertiary 
+    background-color: #373B53
+    color: #888EB0
+    &:hover 
+      background-color: #1E2139
+
+  
 
   &-warning
     background-color: $bg-red
@@ -183,7 +189,35 @@ button, input
   display: flex 
   flex-direction: cloumn
   justify-content: center
+
+.back-btn
+  width: fit-content
+  padding: .5rem .8rem
+  padding-left: .2rem
+  display: flex
+  gap: 1rem
+  font-size: $fs-base
+  font-weight: bold
+  align-items: center
     
+// sidebar modal custom styles 
+.p-sidebar-left
+  width: 100% !important
+  padding-top: 4rem
+    
+.p-dropdown
+  width: 100% 
+  padding: .2rem
+  span
+    font-family: $ff-spartan
+
+.p-calendar
+  width: 100% 
+  input
+    padding: 1rem 
+
+.p-toast-top-right
+  z-index: 5000 !important
 
 [data-theme="dark"]
     $bg-clr: $clr-dark // main background color
@@ -200,3 +234,17 @@ button, input
         font-family: $ff-spartan
         background-color: $bg-clr
         color: $text-primary
+
+
+@media screen and (min-width: 768px)
+  // sidebar modal custom styles 
+  .p-sidebar-left
+    width: 75% !important
+
+
+@media screen and (min-width: 1024px)
+  // sidebar modal custom styles 
+  .p-sidebar-left
+    width: 50% !important
+    padding-top: initial
+    padding-left: 6rem
