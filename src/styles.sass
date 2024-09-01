@@ -218,6 +218,22 @@ button, input
 
 .p-toast-top-right
   z-index: 5000 !important
+  font-family: $ff-spartan !important
+
+.p-confirm-dialog 
+  font-family: $ff-spartan !important
+  width: 85%
+  
+  .p-dialog-title 
+    font-size: $fs-lg !important
+    line-height: 115% !important
+  .p-dialog-content
+    line-height: 115% !important
+
+
+
+.no-scroll 
+  overflow: hidden
 
 [data-theme="dark"]
     $bg-clr: $clr-dark // main background color
@@ -241,6 +257,10 @@ button, input
   .p-sidebar-left
     width: 75% !important
 
+  .p-confirm-dialog 
+    width: 50% !important
+
+
 
 @media screen and (min-width: 1024px)
   // sidebar modal custom styles 
@@ -248,3 +268,6 @@ button, input
     width: 50% !important
     padding-top: initial
     padding-left: 6rem
+
+  .p-confirm-dialog 
+    width: 30% !important
