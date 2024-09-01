@@ -8,12 +8,19 @@ import { loadTheme } from './store/theme/theme.actions';
 import { Observable } from 'rxjs';
 import { selectCurrentTheme } from './store/theme/theme.selectors';
 import { AsyncPipe } from '@angular/common';
-import { MainPanelComponent } from "./components/main-panel/main-panel.component";
+import { MainPanelComponent } from './components/main-panel/main-panel.component';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, InvoiceListComponent, AsyncPipe, MainPanelComponent],
+  imports: [
+    RouterOutlet,
+    InvoiceListComponent,
+    AsyncPipe,
+    MainPanelComponent,
+    ToastModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
 })
@@ -32,6 +39,4 @@ export class AppComponent {
       document.documentElement.setAttribute('data-theme', theme);
     });
   }
-
-  
 }
