@@ -11,9 +11,10 @@ import {
 import { InvoiceFormComponent } from '../invoice-form/invoice-form.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ModalService } from '../../services/modalService/modal.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-invoice-detail-header',
@@ -27,7 +28,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   ],
   templateUrl: './invoice-detail-header.component.html',
   styleUrl: './invoice-detail-header.component.sass',
-  providers: [MessageService, ConfirmationService],
+  // providers: [MessageService, ConfirmationService],
 })
 export class InvoiceDetailHeaderComponent {
   @Input() invoice!: Invoice;
@@ -37,8 +38,8 @@ export class InvoiceDetailHeaderComponent {
     private router: Router,
     private store: Store<AppState>,
     private modalService: ModalService,
-    private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService
   ) {
     this.modalService.isModalOpen('editInvoice').subscribe((isOpen) => {
       this.isEditModalOpen = isOpen;
@@ -55,12 +56,7 @@ export class InvoiceDetailHeaderComponent {
       acceptButtonStyleClass: 'btn btn-warning',
       accept: () => {
         this.store.dispatch(deleteInvoice({ id }));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Delete Item',
-          detail: `Item ${id} Deleted`,
-          life: 10000,
-        });
+        this.toastService.showSuccess("Delete Item", `Item ${id} Deleted` )
         this.router.navigate(['']);
       },
       // reject: () => {
@@ -76,19 +72,11 @@ export class InvoiceDetailHeaderComponent {
 
   markAsPaid = (id: string) => {
     this.store.dispatch(updateInvoice({ invoice: { id, status: 'paid' } }));
-    this.showToast({
-      type: 'success',
-      message: 'Invoice marked as paid',
-      title: 'Status Updated',
-    });
+    this.toastService.showSuccess('Status Updated', 'Invoice marked as paid')
   };
   markAsPending = (id: string) => {
     this.store.dispatch(updateInvoice({ invoice: { id, status: 'pending' } }));
-    this.showToast({
-      type: 'success',
-      message: 'Invoice marked as Pending',
-      title: 'Status Updated',
-    });
+    this.toastService.showSuccess('Status Updated', 'Invoice marked as Pending')
   };
 
   openEditModal = () => {
@@ -98,13 +86,6 @@ export class InvoiceDetailHeaderComponent {
     this.modalService.closeModal('editInvoice');
   };
 
-  showToast(event: { type: string; message: string; title: string }) {
-    this.messageService.add({
-      severity: event.type,
-      summary: event.title,
-      detail: event.message,
-    });
-  }
 
   onSidebarVisibleChange(isVisible: boolean) {
     if (isVisible) {
