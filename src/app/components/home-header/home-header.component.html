@@ -86,7 +86,6 @@
       <span>Back</span>
     </button>
   </ng-template>
-  <app-invoice-form (closeModal)="closeNewInvoiceModal()" (showToast)="showToast($event)" />
+  <app-invoice-form (closeModal)="closeNewInvoiceModal()"  />
 </p-sidebar>
 
-<p-toast [breakpoints]="{ '480px': { width: '70%', right: '0', left: 'initial' },  }" />
