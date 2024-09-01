@@ -13,7 +13,14 @@
           id="senderStreet"
           type="text"
           formControlName="street"
+          [ngClass]="{ invalid: isFieldInvalid('senderAddress.street') }"
         />
+        <small
+          class="error-message"
+          *ngIf="isFieldInvalid('senderAddress.street')"
+        >
+          {{ getFieldError("senderAddress.street") }}
+        </small>
       </div>
       <div class="address-grid">
         <div class="form-field">
@@ -23,7 +30,14 @@
             id="senderCity"
             type="text"
             formControlName="city"
+            [ngClass]="{ invalid: isFieldInvalid('senderAddress.city') }"
           />
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('senderAddress.city')"
+          >
+            {{ getFieldError("senderAddress.city") }}
+          </small>
         </div>
         <div class="form-field">
           <label for="senderPostCode">Post Code</label>
@@ -32,7 +46,14 @@
             id="senderPostCode"
             type="text"
             formControlName="postCode"
+            [ngClass]="{ invalid: isFieldInvalid('senderAddress.postCode') }"
           />
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('senderAddress.postCode')"
+          >
+            {{ getFieldError("senderAddress.postCode") }}
+          </small>
         </div>
         <div class="form-field">
           <label for="senderCountry">Country</label>
@@ -41,7 +62,14 @@
             id="senderCountry"
             type="text"
             formControlName="country"
+            [ngClass]="{ invalid: isFieldInvalid('senderAddress.country') }"
           />
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('senderAddress.country')"
+          >
+            {{ getFieldError("senderAddress.country") }}
+          </small>
         </div>
       </div>
     </div>
@@ -56,7 +84,14 @@
           id="clientName"
           type="text"
           formControlName="clientName"
+          [ngClass]="{ invalid: isFieldInvalid('clientAddress.clientName') }"
         />
+        <small
+          class="error-message"
+          *ngIf="isFieldInvalid('clientAddress.clientName')"
+        >
+          {{ getFieldError("clientAddress.clientName") }}
+        </small>
       </div>
 
       <div class="form-field">
@@ -66,7 +101,14 @@
           id="clientEmail"
           type="email"
           formControlName="clientEmail"
+          [ngClass]="{ invalid: isFieldInvalid('clientAddress.clientEmail') }"
         />
+        <small
+          class="error-message"
+          *ngIf="isFieldInvalid('clientAddress.clientEmail')"
+        >
+          {{ getFieldError("clientAddress.clientEmail") }}
+        </small>
       </div>
       <div class="form-field">
         <label for="clientStreet">Street Address</label>
@@ -75,7 +117,11 @@
           id="clientStreet"
           type="text"
           formControlName="street"
+          [ngClass]="{'invalid': isFieldInvalid('clientAddress.street')}"
         />
+        <small class="error-message" *ngIf="isFieldInvalid('clientAddress.street')">
+          {{ getFieldError('clientAddress.street') }}
+        </small>
       </div>
 
       <div class="address-grid">
@@ -86,7 +132,11 @@
             id="clientCity"
             type="text"
             formControlName="city"
+            [ngClass]="{'invalid': isFieldInvalid('clientAddress.city')}"
           />
+          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.city')">
+            {{ getFieldError('clientAddress.city') }}
+          </small>
         </div>
         <div class="form-field">
           <label for="clientPostCode">Post Code</label>
@@ -95,7 +145,11 @@
             id="clientPostCode"
             type="text"
             formControlName="postCode"
+            [ngClass]="{'invalid': isFieldInvalid('clientAddress.postCode')}"
           />
+          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.postCode')">
+            {{ getFieldError('clientAddress.postCode') }}
+          </small>
         </div>
         <div class="form-field">
           <label for="clientCountry">Country</label>
@@ -104,7 +158,11 @@
             id="clientCountry"
             type="text"
             formControlName="country"
+            [ngClass]="{'invalid': isFieldInvalid('clientAddress.country')}"
           />
+          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.country')">
+            {{ getFieldError('clientAddress.country') }}
+          </small>
         </div>
       </div>
     </div>
@@ -117,7 +175,11 @@
           type="date"
           formControlName="createdAt"
           (onChange)="updateCreatedAt($event)"
+          [ngClass]="{'invalid': isFieldInvalid('createdAt')}"
         />
+        <small class="error-message" *ngIf="isFieldInvalid('createdAt')">
+          {{ getFieldError('createdAt') }}
+        </small>
       </div>
 
       <div class="form-field">
@@ -127,7 +189,11 @@
           [options]="paymentTermsOptions"
           optionLabel="name"
           placeholder="Select payment terms"
+          [ngClass]="{'invalid': isFieldInvalid('paymentTerms')}"
         />
+        <small class="error-message" *ngIf="isFieldInvalid('paymentTerms')">
+          {{ getFieldError('paymentTerms') }}
+        </small>
       </div>
     </div>
 
@@ -138,7 +204,11 @@
         id="description"
         type="text"
         formControlName="description"
+        [ngClass]="{'invalid': isFieldInvalid('description')}"
       />
+      <small class="error-message" *ngIf="isFieldInvalid('description')">
+        {{ getFieldError('description') }}
+      </small>
     </div>
 
     <h5>Items</h5>
@@ -154,7 +224,11 @@
             [id]="'itemName' + i"
             type="text"
             formControlName="name"
+            [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.name')}"
           />
+          <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.name')">
+            {{ getFieldError('items.' + i + '.name') }}
+          </small>
         </div>
         <div class="item-grid">
           <div class="form-field">
@@ -165,7 +239,11 @@
               type="number"
               formControlName="quantity"
               (change)="calculateItemTotal(i)"
+              [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.quantity')}"
             />
+            <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.quantity')">
+              {{ getFieldError('items.' + i + '.quantity') }}
+            </small>
           </div>
           <div class="form-field">
             <label [for]="'itemPrice' + i">Price</label>
@@ -175,7 +253,11 @@
               type="number"
               formControlName="price"
               (change)="calculateItemTotal(i)"
+              [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.price')}"
             />
+            <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.price')">
+              {{ getFieldError('items.' + i + '.price') }}
+            </small>
           </div>
           <div class="form-field">
             <label [for]="'itemTotal' + i">Total</label>
@@ -199,8 +281,15 @@
             </button>
           </div>
         </div>
+        <small style="margin-bottom: 5px;" class="error-message" *ngIf="items.invalid && (items.dirty || items.touched)">
+          At least one item is required
+        </small>
+
       </div>
     </div>
+
+   
+
 
     <div class="add-new-item">
       <button type="button " class="btn-secondary btn" (click)="addItem()">
@@ -209,7 +298,11 @@
     </div>
 
     <div class="form-actions">
-      <button type="button" (click)="handleCloseModal()" class="btn btn-secondary">
+      <button
+        type="button"
+        (click)="handleCloseModal()"
+        class="btn btn-secondary"
+      >
         Cancel
       </button>
       <!-- save as draft -->

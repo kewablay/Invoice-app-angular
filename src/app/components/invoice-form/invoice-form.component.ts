@@ -97,7 +97,8 @@ export class InvoiceFormComponent implements OnInit {
       paymentTerms: [this.invoice?.paymentTerms || '', Validators.required],
       description: [this.invoice?.description || '', Validators.required],
       items: this.fb.array(
-        this.invoice?.items.map((item) => this.createItemFormGroup(item)) || []
+        this.invoice?.items.map((item) => this.createItemFormGroup(item)) || [],
+        Validators.minLength(1)
       ),
     });
 
@@ -216,5 +217,38 @@ export class InvoiceFormComponent implements OnInit {
 
   handleCloseModal() {
     this.closeModal.emit();
+  }
+
+  markFormGroupTouched(formGroup: FormGroup | FormArray) {
+    Object.values(formGroup.controls).forEach((control) => {
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
+      }
+    });
+  }
+
+  getFieldError(fieldName: string): string {
+    const control = this.invoiceForm.get(fieldName);
+    if (control && control.touched && control.invalid) {
+      if (control.errors?.['required']) {
+        return "Can't be empty";
+      }
+      if (control.errors?.['email']) {
+        return 'Invalid email format';
+      }
+      if (control.errors?.['min']) {
+        return 'Must be greater than 0';
+      }
+    }
+    return '';
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const control = this.invoiceForm.get(fieldName);
+    return (
+      control !== null && control.invalid && (control.dirty || control.touched)
+    );
   }
 }

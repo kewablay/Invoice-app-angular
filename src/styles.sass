@@ -199,6 +199,11 @@ button, input
   font-size: $fs-base
   font-weight: bold
   align-items: center
+
+.error-message
+  color: $bg-red
+  font-size: $fs-sm
+  font-weight: 600
     
 // sidebar modal custom styles 
 .p-sidebar-left
@@ -230,7 +235,17 @@ button, input
   .p-dialog-content
     line-height: 115% !important
 
+.p-inputtext.invalid
+  border-color: red
+  border-width: 1.15px
 
+.p-inputtext:hover
+  border-color: $primary-purple
+
+.p-inputtext:focus-visible
+  border-color: $primary-purple
+  outline: $primary-purple
+  
 
 .no-scroll 
   overflow: hidden
