@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
-import { BrowserModule } from '@angular/platform-browser';
 import {
   addInvoice,
   updateInvoice,
@@ -17,41 +16,51 @@ import {
 import { GenerateIdService } from '../../services/generateId/generate-id.service';
 import { CommonModule } from '@angular/common';
 import { Invoice } from '../../models/invoice.model';
-import { Observable } from 'rxjs';
-import { selectInvoiceById } from '../../store/invoices/invoices-selectors/invoices.selectors';
 import { ModalService } from '../../services/modalService/modal.service';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    DropdownModule,
+    CalendarModule,
+    ToastModule,
+  ],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.sass',
 })
-export class InvoiceFormComponent {
+export class InvoiceFormComponent implements OnInit {
   invoiceForm: FormGroup;
-  // items: FormArray;
-  // @Input() formType: 'addInvoice' | 'editInvoice' = 'addInvoice';
-  // isEditInvoice = this.formType === 'editInvoice';
-
   @Input() invoice: Invoice | null = null;
+  @Output() closeModal = new EventEmitter();
+  @Output() showToast = new EventEmitter<{
+    type: string;
+    message: string;
+    title: string;
+  }>();
 
   paymentTermsOptions = [
-    { value: 1, label: 'Net 1 Day' },
-    { value: 7, label: 'Net 7 Days' },
-    { value: 14, label: 'Net 14 Days' },
-    { value: 30, label: 'Net 30 Days' },
+    { value: 1, name: 'Net 1 Day' },
+    { value: 7, name: 'Net 7 Days' },
+    { value: 14, name: 'Net 14 Days' },
+    { value: 30, name: 'Net 30 Days' },
   ];
 
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
-    private generateId: GenerateIdService, 
+    private generateId: GenerateIdService,
     private modalService: ModalService
   ) {
     this.invoiceForm = this.fb.group({});
-
-    // this.items = this.fb.array([]);
   }
 
   ngOnInit() {
@@ -60,14 +69,6 @@ export class InvoiceFormComponent {
 
   initForm() {
     this.invoiceForm = this.fb.group({
-      createdAt: [this.invoice?.createdAt || '', Validators.required],
-      clientName: [this.invoice?.clientName || '', Validators.required],
-      clientEmail: [
-        this.invoice?.clientEmail || '',
-        [Validators.required, Validators.email],
-      ],
-      description: [this.invoice?.description || '', Validators.required],
-      paymentTerms: [this.invoice?.paymentTerms || '', Validators.required],
       senderAddress: this.fb.group({
         street: [this.invoice?.senderAddress.street || '', Validators.required],
         city: [this.invoice?.senderAddress.city || '', Validators.required],
@@ -81,6 +82,11 @@ export class InvoiceFormComponent {
         ],
       }),
       clientAddress: this.fb.group({
+        clientName: [this.invoice?.clientName || '', Validators.required],
+        clientEmail: [
+          this.invoice?.clientEmail || '',
+          [Validators.required, Validators.email],
+        ],
         street: [this.invoice?.clientAddress.street || '', Validators.required],
         city: [this.invoice?.clientAddress.city || '', Validators.required],
         postCode: [
@@ -92,11 +98,14 @@ export class InvoiceFormComponent {
           Validators.required,
         ],
       }),
+      createdAt: [this.invoice?.createdAt || '', Validators.required],
+      paymentTerms: [this.invoice?.paymentTerms || '', Validators.required],
+      description: [this.invoice?.description || '', Validators.required],
       items: this.fb.array(
         this.invoice?.items.map((item) => this.createItemFormGroup(item)) || []
       ),
     });
-    //  if there is no invoice then we should add one item
+
     if (!this.invoice) {
       this.addItem();
     }
@@ -116,14 +125,7 @@ export class InvoiceFormComponent {
   }
 
   addItem() {
-    const itemForm = this.fb.group({
-      name: ['', Validators.required],
-      quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [0, [Validators.required, Validators.min(0)]],
-      total: [{ value: 0, disabled: true }],
-    });
-
-    this.items.push(itemForm);
+    this.items.push(this.createItemFormGroup());
   }
 
   removeItem(index: number) {
@@ -138,19 +140,28 @@ export class InvoiceFormComponent {
     item.patchValue({ total: total });
   }
 
+  updateCreatedAt(event: any) {
+    this.invoiceForm.get('createdAt')?.setValue(event.value);
+  }
+
   onSubmit() {
     if (this.invoiceForm.valid) {
-      const formValue = this.invoiceForm.value;
+      const formValue = this.invoiceForm.getRawValue();
       const createdAt = new Date(formValue.createdAt);
+      const paymentTerms =
+        formValue.paymentTerms.value || formValue.paymentTerms;
       const paymentDue = new Date(createdAt);
-      paymentDue.setDate(paymentDue.getDate() + formValue.paymentTerms);
+      paymentDue.setDate(paymentDue.getDate() + paymentTerms);
 
       const newInvoice = {
         ...formValue,
         id: this.invoice ? this.invoice.id : this.generateId.generateUniqueId(),
         createdAt: createdAt.toISOString().split('T')[0],
         paymentDue: paymentDue.toISOString().split('T')[0],
-        status: !this.invoice ? 'pending' as 'paid' | 'pending' | 'draft' : this.invoice.status, // if its a new invoice set status to pending
+        paymentTerms: paymentTerms,
+        status: !this.invoice ? 'pending' : this.invoice.status,
+        clientName: formValue.clientAddress.clientName,
+        clientEmail: formValue.clientAddress.clientEmail,
         items: formValue.items.map((item: any) => ({
           ...item,
           total: item.quantity * item.price,
@@ -161,20 +172,30 @@ export class InvoiceFormComponent {
         ),
       };
 
-      // if invoice is editing then we dispatch updateInvoice else we createInvoice
       if (this.invoice) {
         const id = this.invoice.id;
         this.store.dispatch(updateInvoice({ invoice: { id, ...newInvoice } }));
         this.modalService.closeModal('editInvoice');
+        console.log('About to emit update success');
+        this.showToast.emit({
+          type: 'success',
+          title: 'Success',
+          message: 'Invoice updated successfully',
+        });
       } else {
         this.store.dispatch(addInvoice({ invoice: newInvoice }));
         this.modalService.closeModal('newInvoice');
+        this.showToast.emit({
+          type: 'success',
+          title: 'Success',
+          message: 'Invoice created successfully',
+        });
       }
     }
   }
 
   saveAsDraft() {
-    const formValue = this.invoiceForm.value;
+    const formValue = this.invoiceForm.getRawValue();
 
     const draftInvoice = {
       ...formValue,
@@ -182,6 +203,8 @@ export class InvoiceFormComponent {
       createdAt: new Date().toISOString().split('T')[0],
       paymentDue: '', // Can be left empty for drafts
       status: 'draft' as 'paid' | 'pending' | 'draft',
+      clientName: formValue.clientAddress.clientName,
+      clientEmail: formValue.clientAddress.clientEmail,
       items: formValue.items.map((item: any) => ({
         ...item,
         total: (item.quantity || 0) * (item.price || 0),
@@ -194,5 +217,15 @@ export class InvoiceFormComponent {
     };
 
     this.store.dispatch(addInvoice({ invoice: draftInvoice }));
+    this.modalService.closeModal('newInvoice');
+    this.showToast.emit({
+      type: 'info',
+      title: 'Updated',
+      message: 'Invoice added as draft',
+    });
+  }
+
+  handleCloseModal() {
+    this.closeModal.emit();
   }
 }
