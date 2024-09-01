@@ -281,13 +281,13 @@
             </button>
           </div>
         </div>
-        <small style="margin-bottom: 5px;" class="error-message" *ngIf="items.invalid && (items.dirty || items.touched)">
-          At least one item is required
-        </small>
-
+        
       </div>
     </div>
-
+    
+    <small style="margin-bottom: 5px;" class="info-message" *ngIf="items.invalid && (items.dirty || items.touched)">
+      At least one item is required
+    </small>
    
 
 
