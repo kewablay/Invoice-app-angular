@@ -20,7 +20,7 @@ import { ModalService } from '../../services/modalService/modal.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
-import { ToastModule } from 'primeng/toast';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -32,7 +32,6 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     DropdownModule,
     CalendarModule,
-    ToastModule,
   ],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.sass',
@@ -41,11 +40,6 @@ export class InvoiceFormComponent implements OnInit {
   invoiceForm: FormGroup;
   @Input() invoice: Invoice | null = null;
   @Output() closeModal = new EventEmitter();
-  @Output() showToast = new EventEmitter<{
-    type: string;
-    message: string;
-    title: string;
-  }>();
 
   paymentTermsOptions = [
     { value: 1, name: 'Net 1 Day' },
@@ -58,7 +52,8 @@ export class InvoiceFormComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store<AppState>,
     private generateId: GenerateIdService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private toastService: ToastService
   ) {
     this.invoiceForm = this.fb.group({});
   }
@@ -177,19 +172,17 @@ export class InvoiceFormComponent implements OnInit {
         this.store.dispatch(updateInvoice({ invoice: { id, ...newInvoice } }));
         this.modalService.closeModal('editInvoice');
         console.log('About to emit update success');
-        this.showToast.emit({
-          type: 'success',
-          title: 'Success',
-          message: 'Invoice updated successfully',
-        });
+        this.toastService.showSuccess(
+          'Success',
+          'Invoice updated successfully'
+        );
       } else {
         this.store.dispatch(addInvoice({ invoice: newInvoice }));
         this.modalService.closeModal('newInvoice');
-        this.showToast.emit({
-          type: 'success',
-          title: 'Success',
-          message: 'Invoice created successfully',
-        });
+        this.toastService.showSuccess(
+          'Success',
+          'Invoice created successfully'
+        );
       }
     }
   }
@@ -218,11 +211,7 @@ export class InvoiceFormComponent implements OnInit {
 
     this.store.dispatch(addInvoice({ invoice: draftInvoice }));
     this.modalService.closeModal('newInvoice');
-    this.showToast.emit({
-      type: 'info',
-      title: 'Updated',
-      message: 'Invoice added as draft',
-    });
+    this.toastService.showSuccess('Success', 'Invoice added as draft');
   }
 
   handleCloseModal() {
