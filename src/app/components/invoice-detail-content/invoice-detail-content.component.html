@@ -69,11 +69,11 @@
     </div>
 
     }
+    <div class="total flex-between">
+      <p>Grand Total</p>
+      <h1 class="title">{{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}</h1>
+    </div>
   </div>
   <!-- item lists ends -->
 
-  <div class="total flex-between">
-    <p>Grand Total</p>
-    <h1 class="title">{{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}</h1>
-  </div>
 </div>
