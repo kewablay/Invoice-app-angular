@@ -25,6 +25,8 @@ export const deleteInvoice = createAction(
   props<{ id: string }>()
 );
 
+export const addInvoiceSuccess = createAction('[Invoices] Add Invoice Success');
+
 // export const updateFilters = createAction(
 //   '[Invoices] Update Filters',
 //   props<{ filters: { paid: boolean; pending: boolean; draft: boolean } }>()
