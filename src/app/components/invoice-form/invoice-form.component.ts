@@ -195,7 +195,13 @@ export class InvoiceFormComponent implements OnInit {
 
   saveAsDraft() {
     const formValue = this.invoiceForm.getRawValue();
+    const clientName = this.invoiceForm.get("clientAddress.clientName")
 
+    if (clientName?.invalid) {
+      // Mark all fields as touched to trigger validation messages
+      clientName?.markAsTouched();
+      return;
+    }
     const draftInvoice = {
       ...formValue,
       id: this.invoice ? this.invoice.id : this.generateId.generateUniqueId(),
