@@ -227,6 +227,8 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   handleCloseModal() {
+    this.invoiceForm.reset()
+    this.invoiceForm.markAsPristine();
     this.closeModal.emit();
   }
 
