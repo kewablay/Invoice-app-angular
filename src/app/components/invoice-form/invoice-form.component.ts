@@ -141,6 +141,11 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.invoiceForm.invalid) {
+      // Mark all fields as touched to trigger validation messages
+      this.invoiceForm.markAllAsTouched();
+      return;
+    }
     if (this.invoiceForm.valid) {
       const formValue = this.invoiceForm.getRawValue();
       const createdAt = new Date(formValue.createdAt);
