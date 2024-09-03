@@ -11,7 +11,7 @@ header
     .filter-and-newInvoice
         gap: .2rem
 
-        &.filter-and-newInvoice:hover .filter-button:hover, .filter-button:focus .filter-dropdown
+        &.filter-and-newInvoice .filter-button:focus-within .filter-dropdown
             transform: scale(1, 1)
             transform-origin: top
             transition: all 0.2s ease-in-out
@@ -47,6 +47,7 @@ header
                 display: flex
                 align-items: center
                 gap: .5rem
+                cursor: pointer
         [data-theme="dark"]
             .filter-dropdown
                 background: $bg-accent !important
