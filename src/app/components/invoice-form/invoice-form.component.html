@@ -117,10 +117,13 @@
           id="clientStreet"
           type="text"
           formControlName="street"
-          [ngClass]="{'invalid': isFieldInvalid('clientAddress.street')}"
+          [ngClass]="{ invalid: isFieldInvalid('clientAddress.street') }"
         />
-        <small class="error-message" *ngIf="isFieldInvalid('clientAddress.street')">
-          {{ getFieldError('clientAddress.street') }}
+        <small
+          class="error-message"
+          *ngIf="isFieldInvalid('clientAddress.street')"
+        >
+          {{ getFieldError("clientAddress.street") }}
         </small>
       </div>
 
@@ -132,10 +135,13 @@
             id="clientCity"
             type="text"
             formControlName="city"
-            [ngClass]="{'invalid': isFieldInvalid('clientAddress.city')}"
+            [ngClass]="{ invalid: isFieldInvalid('clientAddress.city') }"
           />
-          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.city')">
-            {{ getFieldError('clientAddress.city') }}
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('clientAddress.city')"
+          >
+            {{ getFieldError("clientAddress.city") }}
           </small>
         </div>
         <div class="form-field">
@@ -145,10 +151,13 @@
             id="clientPostCode"
             type="text"
             formControlName="postCode"
-            [ngClass]="{'invalid': isFieldInvalid('clientAddress.postCode')}"
+            [ngClass]="{ invalid: isFieldInvalid('clientAddress.postCode') }"
           />
-          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.postCode')">
-            {{ getFieldError('clientAddress.postCode') }}
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('clientAddress.postCode')"
+          >
+            {{ getFieldError("clientAddress.postCode") }}
           </small>
         </div>
         <div class="form-field">
@@ -158,10 +167,13 @@
             id="clientCountry"
             type="text"
             formControlName="country"
-            [ngClass]="{'invalid': isFieldInvalid('clientAddress.country')}"
+            [ngClass]="{ invalid: isFieldInvalid('clientAddress.country') }"
           />
-          <small class="error-message" *ngIf="isFieldInvalid('clientAddress.country')">
-            {{ getFieldError('clientAddress.country') }}
+          <small
+            class="error-message"
+            *ngIf="isFieldInvalid('clientAddress.country')"
+          >
+            {{ getFieldError("clientAddress.country") }}
           </small>
         </div>
       </div>
@@ -175,10 +187,10 @@
           type="date"
           formControlName="createdAt"
           (onChange)="updateCreatedAt($event)"
-          [ngClass]="{'invalid': isFieldInvalid('createdAt')}"
+          [ngClass]="{ invalid: isFieldInvalid('createdAt') }"
         />
         <small class="error-message" *ngIf="isFieldInvalid('createdAt')">
-          {{ getFieldError('createdAt') }}
+          {{ getFieldError("createdAt") }}
         </small>
       </div>
 
@@ -189,10 +201,10 @@
           [options]="paymentTermsOptions"
           optionLabel="name"
           placeholder="Select payment terms"
-          [ngClass]="{'invalid': isFieldInvalid('paymentTerms')}"
+          [ngClass]="{ invalid: isFieldInvalid('paymentTerms') }"
         />
         <small class="error-message" *ngIf="isFieldInvalid('paymentTerms')">
-          {{ getFieldError('paymentTerms') }}
+          {{ getFieldError("paymentTerms") }}
         </small>
       </div>
     </div>
@@ -204,10 +216,10 @@
         id="description"
         type="text"
         formControlName="description"
-        [ngClass]="{'invalid': isFieldInvalid('description')}"
+        [ngClass]="{ invalid: isFieldInvalid('description') }"
       />
       <small class="error-message" *ngIf="isFieldInvalid('description')">
-        {{ getFieldError('description') }}
+        {{ getFieldError("description") }}
       </small>
     </div>
 
@@ -217,20 +229,23 @@
         *ngFor="let item of items.controls; let i = index"
         [formGroupName]="i"
       >
-        <div class="form-field">
-          <label [for]="'itemName' + i">Item Name</label>
-          <input
-            pInputText
-            [id]="'itemName' + i"
-            type="text"
-            formControlName="name"
-            [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.name')}"
-          />
-          <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.name')">
-            {{ getFieldError('items.' + i + '.name') }}
-          </small>
-        </div>
         <div class="item-grid">
+          <div class="form-field">
+            <label [for]="'itemName' + i">Item Name</label>
+            <input
+              pInputText
+              [id]="'itemName' + i"
+              type="text"
+              formControlName="name"
+              [ngClass]="{ invalid: isFieldInvalid('items.' + i + '.name') }"
+            />
+            <small
+              class="error-message"
+              *ngIf="isFieldInvalid('items.' + i + '.name')"
+            >
+              {{ getFieldError("items." + i + ".name") }}
+            </small>
+          </div>
           <div class="form-field">
             <label [for]="'itemQuantity' + i">Quantity</label>
             <input
@@ -239,10 +254,15 @@
               type="number"
               formControlName="quantity"
               (change)="calculateItemTotal(i)"
-              [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.quantity')}"
+              [ngClass]="{
+                invalid: isFieldInvalid('items.' + i + '.quantity')
+              }"
             />
-            <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.quantity')">
-              {{ getFieldError('items.' + i + '.quantity') }}
+            <small
+              class="error-message"
+              *ngIf="isFieldInvalid('items.' + i + '.quantity')"
+            >
+              {{ getFieldError("items." + i + ".quantity") }}
             </small>
           </div>
           <div class="form-field">
@@ -253,10 +273,13 @@
               type="number"
               formControlName="price"
               (change)="calculateItemTotal(i)"
-              [ngClass]="{'invalid': isFieldInvalid('items.' + i + '.price')}"
+              [ngClass]="{ invalid: isFieldInvalid('items.' + i + '.price') }"
             />
-            <small class="error-message" *ngIf="isFieldInvalid('items.' + i + '.price')">
-              {{ getFieldError('items.' + i + '.price') }}
+            <small
+              class="error-message"
+              *ngIf="isFieldInvalid('items.' + i + '.price')"
+            >
+              {{ getFieldError("items." + i + ".price") }}
             </small>
           </div>
           <div class="form-field">
@@ -281,15 +304,16 @@
             </button>
           </div>
         </div>
-        
       </div>
     </div>
-    
-    <small style="margin-bottom: 5px;" class="info-message" *ngIf="items.invalid && (items.dirty || items.touched)">
+
+    <small
+      style="margin-bottom: 5px"
+      class="info-message"
+      *ngIf="items.invalid && (items.dirty || items.touched)"
+    >
       At least one item is required
     </small>
-   
-
 
     <div class="add-new-item">
       <button type="button " class="btn-secondary btn" (click)="addItem()">
@@ -302,19 +326,24 @@
         type="button"
         (click)="handleCloseModal()"
         class="btn btn-secondary"
+        pRipple
+        pButton
       >
         Discard
       </button>
       <!-- save as draft -->
       @if(!invoice) {
-      <button class="btn btn-tertiary" type="button" (click)="saveAsDraft()">
+      <button
+        pRipple
+        pButton
+        class="btn btn-tertiary"
+        type="button"
+        (click)="saveAsDraft()"
+      >
         Save as Draft
       </button>
       }
-      <button
-        class="btn btn-primary"
-        type="submit"
-      >
+      <button class="btn btn-primary" type="submit" pRipple pButton>
         {{ invoice ? "Update Invoice" : "Save & Send" }}
       </button>
       <!-- <button

@@ -21,6 +21,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastService } from '../../services/toast/toast.service';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-invoice-form',
@@ -32,6 +34,8 @@ import { ToastService } from '../../services/toast/toast.service';
     InputTextModule,
     DropdownModule,
     CalendarModule,
+    RippleModule,
+    ButtonModule
   ],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.sass',
