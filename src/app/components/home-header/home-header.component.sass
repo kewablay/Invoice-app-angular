@@ -11,7 +11,7 @@ header
     .filter-and-newInvoice
         gap: .2rem
 
-        &.filter-and-newInvoice:hover .filter-button:hover .filter-dropdown
+        &.filter-and-newInvoice:hover .filter-button:hover, .filter-button:focus .filter-dropdown
             transform: scale(1, 1)
             transform-origin: top
             transition: all 0.2s ease-in-out
@@ -39,8 +39,8 @@ header
             gap: .5rem
             border-radius: 10px
             background-color: $bg-white !important
-            padding: .6rem
-            padding-right: 1.5rem
+            padding: .8rem
+            padding-right: 2rem
             box-shadow: $shadow-primary
 
             label 
