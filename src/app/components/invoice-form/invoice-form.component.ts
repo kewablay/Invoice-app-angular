@@ -35,7 +35,7 @@ import { ButtonModule } from 'primeng/button';
     DropdownModule,
     CalendarModule,
     RippleModule,
-    ButtonModule
+    ButtonModule,
   ],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.sass',
@@ -129,7 +129,11 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   removeItem(index: number) {
-    this.items.removeAt(index);
+    if (this.items.length > 1) {
+      this.items.removeAt(index);
+    } else {
+      this.toastService.showError("Error", 'At least one item is required');
+    }
   }
 
   calculateItemTotal(index: number) {
@@ -199,7 +203,7 @@ export class InvoiceFormComponent implements OnInit {
 
   saveAsDraft() {
     const formValue = this.invoiceForm.getRawValue();
-    const clientName = this.invoiceForm.get("clientAddress.clientName")
+    const clientName = this.invoiceForm.get('clientAddress.clientName');
 
     if (clientName?.invalid) {
       // Mark all fields as touched to trigger validation messages
@@ -231,7 +235,7 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   handleCloseModal() {
-    this.invoiceForm.reset()
+    this.invoiceForm.reset();
     this.invoiceForm.markAsPristine();
     this.closeModal.emit();
   }
