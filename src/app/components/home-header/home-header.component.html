@@ -1,7 +1,14 @@
 <header class="flex-between">
   <div class="title-container flex-column">
     <h1 class="title">Invoices</h1>
-    <p>There are {{ count.paid + count.pending + count.draft }} invoices</p>
+    @if((count.paid + count.pending + count.draft) === 0){
+    <p>There are no invoices</p>
+    } @else {
+    <p>
+      There are {{ count.paid }} paid, {{ count.pending }} pending and
+      {{ count.draft }} draft invoices
+    </p>
+    }
   </div>
 
   <div class="filter-and-newInvoice flex">
@@ -85,6 +92,5 @@
       <span>Back</span>
     </button>
   </ng-template>
-  <app-invoice-form (closeModal)="closeNewInvoiceModal()"  />
+  <app-invoice-form (closeModal)="closeNewInvoiceModal()" />
 </p-sidebar>
-
