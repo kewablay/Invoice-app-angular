@@ -34,6 +34,7 @@ export class InvoiceDetailHeaderComponent {
   @Input() invoice!: Invoice;
   isEditModalOpen!: boolean;
 
+
   constructor(
     private router: Router,
     private store: Store<AppState>,

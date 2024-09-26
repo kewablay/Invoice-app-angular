@@ -61,6 +61,12 @@ export class HomeHeaderComponent {
     });
   }
 
+  // ngOnInit() {
+  //   this.filters$.subscribe((filters) => {
+  //     console.log("filters: ", filters)
+  //   })
+  // }
+
   updateFilter(filterType: string, event: Event) {
     const checked = (event.target as HTMLInputElement).checked;
     this.store.dispatch(updateFilters({ filterType, filterValue: checked }));

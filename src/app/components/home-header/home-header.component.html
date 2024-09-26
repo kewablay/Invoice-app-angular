@@ -1,12 +1,31 @@
 <header class="flex-between">
   <div class="title-container flex-column">
     <h1 class="title">Invoices</h1>
-    @if((count.paid + count.pending + count.draft) === 0){
-    <p>There are no invoices</p>
+    @if((filters$ | async)?.paid && (filters$ | async)?.pending && (filters$ |
+    async)?.draft) {
+    <p>
+      There are {{ count.pending }} pending, {{ count.draft }} draft and
+      {{ count.paid }} paid invoices
+    </p>
+    } @else if((filters$ | async)?.paid && (filters$ | async)?.pending) {
+    <p>
+      There are {{ count.pending }} pending and {{ count.paid }} paid invoices
+    </p>
+    } @else if((filters$ | async)?.paid && (filters$ | async)?.draft) {
+    <p>There are {{ count.draft }} draft and {{ count.paid }} paid invoices</p>
+    } @else if((filters$ | async)?.pending && (filters$ | async)?.draft) {
+    <p>
+      There are {{ count.pending }} pending and {{ count.draft }} draft invoices
+    </p>
+    } @else if((filters$ | async)?.paid) {
+    <p>There are {{ count.paid }} paid invoices</p>
+    } @else if((filters$ | async)?.pending) {
+    <p>There are {{ count.pending }} pending invoices</p>
+    } @else if((filters$ | async)?.draft) {
+    <p>There are {{ count.draft }} draft invoices</p>
     } @else {
     <p>
-      There are {{ count.paid }} paid, {{ count.pending }} pending and
-      {{ count.draft }} draft invoices
+      There are {{ count.paid + count.pending + count.draft }} total invoices
     </p>
     }
   </div>
