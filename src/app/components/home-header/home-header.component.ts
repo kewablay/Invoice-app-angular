@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import {
   updateFilters,
 } from '../../store/invoices/invoices-actions/invoices.actions';
-import { selectFilters } from '../../store/invoices/invoices-selectors/invoices.selectors';
+import { selectFilteredInvoices, selectFilters } from '../../store/invoices/invoices-selectors/invoices.selectors';
 import { Filters } from '../../store/invoices/invoice-state/invoice.state';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -31,11 +31,30 @@ export class HomeHeaderComponent {
 
   isNewInvoiceModalOpen!: boolean;
 
+  count = {
+    paid: 0,
+    pending: 0,
+    draft: 0,
+  };
+
   constructor(
     private store: Store<AppState>,
     private modalService: ModalService,
   ) {
     this.filters$ = this.store.select(selectFilters);
+
+    // update counts 
+    this.store.select(selectFilteredInvoices).subscribe((invoices) => {
+      this.count.paid = invoices.filter(
+        (invoice) => invoice.status === 'paid'
+      ).length;
+      this.count.pending = invoices.filter(
+        (invoice) => invoice.status === 'pending'
+      ).length;
+      this.count.draft = invoices.filter(
+        (invoice) => invoice.status === 'draft'
+      ).length;
+    });
 
     this.modalService.isModalOpen('newInvoice').subscribe((isOpen) => {
       this.isNewInvoiceModalOpen = isOpen;

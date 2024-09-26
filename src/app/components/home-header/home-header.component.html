@@ -1,8 +1,7 @@
 <header class="flex-between">
   <div class="title-container flex-column">
     <h1 class="title">Invoices</h1>
-    <!-- <p>There are {{ (invoices$ | async)?.length }} total invoices</p> -->
-    <span class="total-invoices">{{ total }} total invoices </span>
+    <p>There are {{ count.paid + count.pending + count.draft }} invoices</p>
   </div>
 
   <div class="filter-and-newInvoice flex">
